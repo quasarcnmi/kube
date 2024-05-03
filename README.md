@@ -1,9 +1,7 @@
 # Kubernetes HA Install procedure
 
-This is an isntall of the RKE2 Kubernetes Cluster
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="/assets/img/rke2.svg">
-  </picture>
+This is an install of the RKE2 Kubernetes Cluster
+![RKE2 Logo](/assets/img/rke2.svg)
 
 
 I found that this version of Kubernetes install is more straight forward
