@@ -68,7 +68,7 @@ sudo systemctl enable docker --now
 ## Build the Nodes
 Our objectives are: 
 - Ensure we have a non prod user set up on nodes. This user must also have sudo rights for each node member.
-- setup the variables in the ![***set-env.sh***](set-env.sh) script
+- setup the variables in the [***set-env.sh***](set-env.sh) script
 - We will create a Kube-Vip manifest file which will be custom for each of the master nodes. In the case of the Ethernet adapters not being assigned the same port.
 - Initialize the cluster on the first master node
 - Files will be copied back to the admin server.
@@ -84,5 +84,8 @@ This script will set your non-root user access for the entire cluster.
 Once the script has completed and exits, it will have exported the variables 
 into the current shell. 
 
+There will also be a file creaed that will be copied to the first masternode,ctyou will use it to bootstrap the cluster on the first master.
+
+We will create an installation directory in the non-root user's home directory called ```rke2-installer.
 
 
