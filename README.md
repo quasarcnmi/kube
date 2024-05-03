@@ -21,7 +21,7 @@ In order to simulate a cold metal build, We are not using cloud balancers or any
 ## Servers
 
 There will be 5 servers active for this demonstration.
-Admin Server 
+Admin Server  - This is where we can work in our environment and create and manage the cluster.  I will also use it for any misc containers I need, i.e., DNS server, extra load balancer etc. 
 - admin1
 
 Master Servers 
