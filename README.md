@@ -17,7 +17,7 @@ For our A records we installed a [DNS server](https://technitium.com/dns/) on th
 In order to simulate a cold metal build, We are not using cloud balancers or any other cloud application.
 ## RKE2 System Overview
 
-[RKE2 Overview illustrations](/assets/img/overview.png)
+[RKE2 Overview illustrations](/assets/img/overview.jpg)
 ## Servers
 
 There will be 5 servers active for this demonstration.
