@@ -17,7 +17,7 @@ For our A records we installed a [DNS server](https://technitium.com/dns/) on th
 In order to simulate a cold metal build, We are not using cloud balancers or any other cloud application.
 ## RKE2 System Overview
 
-[RKE2 Overview illustrations](/assets/img/overview.jpg)
+[RKE2 Overview illustrations](/assets/img/overview.png)
 ## Servers
 
 There will be 5 servers active for this demonstration.
@@ -31,6 +31,40 @@ Master Servers
 
 Worker Servers (in RKE often referred to as Agents) 
 - worker1
+
+# Install procedure Admin1
+
+
+
+## Install Docker on Admin1 
+
+- Remove any previous installs
+```
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+```
+We are using the Rocky Linux Distribution which is closer than Centos to RHEL.
+
+- Install Docker
+```
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable docker --now
+
+```
+ - Create a non-root user
+
+   - add this user to the wheel and docker groups
+   - Reboot VM
+
+
 
 
 
