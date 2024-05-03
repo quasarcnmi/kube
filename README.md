@@ -20,13 +20,15 @@ In order to simulate a cold metal build, We are not using cloud balancers or any
 
 There will be 5 servers active for this demonstration.
 Admin Server 
-    - admin1
+- admin1
+
 Master Servers 
-    - master1
-    - master2
-    - master3
+- master1
+- master2
+- master3
+
 Worker Servers (in RKE often referred to as Agents) 
-    - worker1
+- worker1
 
 
 
