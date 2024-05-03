@@ -1,18 +1,18 @@
-# Kubernetes HA Install procedure
-
-This is an install of the RKE2 Kubernetes Cluster
 ![RKE2 Logo](/assets/img/rke2.svg)
 
+# Kubernetes RKE2 HA Install procedure
 
-I found that this version of Kubernetes install is more straight forward
-and flexible.  This apparently is the more secure version of Kubernetes from the SUSE Rancher Company .
+This is an install of the RKE2 Kubernetes Cluster. It has been advertised as being a secure producttion ready industry compliant 
+Kubernetes Cluster.
 
-I have borrowed some of the functions and shell snippets from [Jim's Garage](https://youtube.com/@jims-garage).
+I found that this version of Kubernetes install is more straight forward and less cumbersome as a kubeadm build. 
 
-We will be using [Kube-VIP](https://kube-vip.io/docs/)  for the load balancer.
 
-For our A records we install a [DNS server](https://technitium.com/dns/) on the Admin1 server it will serve our VPC needs. This was constructed on 
-Linode based VM's.
+Along with the install documentation the [RKE2 Documentation](https://docs.rke2.io/), I have borrowed some of the functions and shell snippets from  [Jim's Garage](https://youtube.com/@jims-garage).
+
+We will be using [Kube-VIP](https://kube-vip.io/docs/) for the service load balancer as well as the Cloud Balancer.
+
+For our A records we installed a [DNS server](https://technitium.com/dns/) on the Admin1 server it will serve our VPC needs. This was constructed on a [Linode](https://www.linode.com/) cloud service.
 
 In order to simulate a cold metal build, We are not using cloud balancers or any other cloud application.
 
