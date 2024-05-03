@@ -15,7 +15,9 @@ We will be using [Kube-VIP](https://kube-vip.io/docs/) for the service load bala
 For our A records we installed a [DNS server](https://technitium.com/dns/) on the Admin1 server it will serve our VPC needs. This was constructed on a [Linode](https://www.linode.com/) cloud service.
 
 In order to simulate a cold metal build, We are not using cloud balancers or any other cloud application.
+## RKE2 System Overview
 
+[RKE2 Overview illustrations](/assets/img/overview.png)
 ## Servers
 
 There will be 5 servers active for this demonstration.
