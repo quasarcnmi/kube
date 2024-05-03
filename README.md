@@ -21,6 +21,7 @@ In order to simulate a cold metal build, We are not using cloud balancers or any
 ## Servers
 
 There will be 5 servers active for this demonstration.
+
 Admin Server  - This is where we can work in our environment and create and manage the cluster.  I will also use it for any misc containers I need, i.e., DNS server, extra load balancer etc. 
 - admin1
 
@@ -31,10 +32,6 @@ Master Servers
 
 Worker Servers (in RKE often referred to as Agents) 
 - worker1
-
-# Install procedure Admin1
-
-
 
 ## Install Docker on Admin1 
 
@@ -63,6 +60,10 @@ sudo systemctl enable docker --now
 
    - add this user to the wheel and docker groups
    - Reboot VM
+- DNS Server
+   - If not available, create a DNS server to serve the VM's and define the VIP IP. A sample [docker-compose.yml](/docker-compose.yml) will put a DNS service on the `Admin1` server. Use that IP for the `/etc/resolv.conf` entries on all servers. Our example uses the domain ***moda.net***
+
+    
 
 
 
