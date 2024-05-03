@@ -20,9 +20,9 @@ In order to simulate a cold metal build, We are not using cloud balancers or any
 [RKE2 Overview illustrations](/assets/img/overview.png)
 ## Servers
 
-There will be 5 servers active for this demonstration.
+There will be 5 servers active for this example.
 
-Admin Server  - This is where we can work in our environment and create and manage the cluster.  I will also use it for any misc containers I need, i.e., DNS server, extra load balancer etc. 
+Admin Server  - This is where we can work in our environment and create and manage the cluster. I will also use it for any misc containers I need to put into the environment, i.e., DNS server, extra load balancer etc. 
 - admin1
 
 Master Servers 
@@ -34,6 +34,8 @@ Worker Servers (in RKE often referred to as Agents)
 - worker1
 
 ## Install Docker on Admin1 
+Docker is not an absolute requirement for building the cluster, it was necessary when building an isolated environment on a cloud provider. 
+It comes in handy when I need to develop the manifest for ***kube-vip***.
 
 - Remove any previous installs
 ```
@@ -63,7 +65,16 @@ sudo systemctl enable docker --now
 - DNS Server
    - If not available, create a DNS server to serve the VM's and define the VIP IP. A sample [docker-compose.yml](/docker-compose.yml) will put a DNS service on the `Admin1` server. Use that IP for the `/etc/resolv.conf` entries on all servers. Our example uses the domain ***moda.net***
 
-    
+## Build the Nodes
+Our objectives are: 
+- Ensure we have a non prod user set up on nodes
+- setup the variables in the rke2-install.sh script
+- We will create a Kube-Vip manifest file which will be custom for each of the master nodes. In the case of the Ethernet adapters not being assigned the same port.
+- Initialize the cluster on the first master node
+- Files will be copied back to the admin server.
+- The script will then create a install script file and place it in each of the other node
+
+
 
 
 
