@@ -38,5 +38,27 @@ lbrange=10.0.1.2-10.0.1.128
 
 #ssh certificate name variable
 certName=id_rsa
+
+
+## For testing purposes - in case time is wrong due to VM snapshots
+sudo timedatectl set-ntp off
+sudo timedatectl set-ntp on
+
+# Install Kubectl on the Admin server if not already present
+if ! command -v kubectl version &> /dev/null
+then
+    echo "Kubectl not found, installing"
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+else
+    echo "Kubectl already installed"
+fi
+
+#add ssh keys for all nodes
+for node in "${all[@]}"; do
+  ssh-copy-id $user@${$node[0]
+done
+
+
 bash
 
