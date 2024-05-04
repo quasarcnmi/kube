@@ -72,8 +72,10 @@ VIP=10.0.0.10
 INTERFACE=eth0
 KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
 
-sudo mkdir -p /var/lib/rancher/rke2/server/manifests
 alias kube-vip="docker run --network host --rm ghcr.io/kube-vip/kube-vip:$KVVERSION"
+
+
+
 kube-vip manifest daemonset \
     --interface $INTERFACE \
     --address $VIP \
@@ -83,6 +85,10 @@ kube-vip manifest daemonset \
     --services \
     --arp \
     --leaderElection > kube-vip.yaml
+
+
+sudo mkdir -p /var/lib/rancher/rke2/server/manifests
+
 
 sudo cp kube-vip.yaml /var/lib/rancher/rke2/server/manifests/kube-vip.yaml
 
