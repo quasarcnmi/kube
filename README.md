@@ -1,3 +1,6 @@
+
+![Moda Logo](/assets/img/moda.jpg)
+
 ![RKE2 Logo](/assets/img/rke2.jpg)
 
 # Kubernetes RKE2 HA Install procedure

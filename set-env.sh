@@ -39,6 +39,22 @@ lbrange=10.0.1.2-10.0.1.128
 #ssh certificate name variable
 certName=id_rsa
 
+if  [ $USER = 'root' ] 
+then
+echo Cannot be root
+exit
+
+fi
+
+INSTALLDIR="$HOME/kube-installer"
+exit
+
+if [!-d "$HOME/kube-install"]
+then 
+mkdir -p "$HOME/kube-install"
+fi
+# Clear the directory
+rm -fr "$HOME/kube-install/*"
 
 ## For testing purposes - in case time is wrong due to VM snapshots
 sudo timedatectl set-ntp off
