@@ -94,5 +94,11 @@ will be populated by our script -- it will contain a ```config.yaml``` and a ```
 After the cluster has been initialized there will be a ```token``` and a ```rke2.yaml``` file which will be used for  the kubectl 
 certs. 
 
+###Setup callback to ```admin1``` from ```master1```
 
-the ```rke2-installer```  
+Logon ```admin1``` as non-root user :
+```
+ssh-keygen 
+ssh-copy-id admin1
+```
+now when we create the cluster it will send the token and config file back to us
