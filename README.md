@@ -81,7 +81,7 @@ Our objectives are:
 
 ##Install Procedure
 
-execute ***git clone https://github.com/quasarcnmi/kube*** in the home directory of the admin server.
+execute ***git clone https://github.com/quasarcnmi/kube*** in the (non-root) home directory of the admin server.
 
 After cloning this repo - open the [***set-env.sh***](set-env.sh)  script.
 
@@ -89,11 +89,10 @@ Edit the values to customize for your environment.
 
 This script will set your non-root user access for the entire cluster. 
 
-Once the script has completed and exits, it will have exported the variables 
-into the current shell. 
-
-There will also be a file created that will be copied to the first masternode, you will use it to bootstrap the cluster on the first master.
-
-We will create an installation directory in the non-root user's home directory called ```rke2-installer```
+We will create an installation directory in the non-root user's home directory called ```rke2-installer```. which
+will be populated by our script -- it will contain a ```config.yaml``` and a ```kube-vip.yaml``` and an ```install.sh script```.
+After the cluster has been initialized there will be a ```token``` and a ```rke2.yaml``` file which will be used for  the kubectl 
+certs. 
 
 
+the ```rke2-installer```  

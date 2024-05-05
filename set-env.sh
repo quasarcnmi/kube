@@ -1,24 +1,14 @@
 #!/bin/bash
-
-
-
-
 echo ======================
 echo Customizing for MODA
 echo ======================
-
-
 if  [ $USER = 'root' ] 
 then
 echo Cannot be root
 exit 
 fi
-
 echo Adding applications to Admin1
-
 sudo dnf install jq mc curl wget 
-
-
 # Version of Kube-VIP to deploy
 export KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
 # Set the IP addresses of the admin, masters, and workers nodes
@@ -71,7 +61,7 @@ fi
 
 # Create install directories in $INSTALLDIR
 
-
+cp ~/kube/user-conf.sh .
 
 ## For testing purposes - in case time is wrong due to VM snapshots
 sudo timedatectl set-ntp off
@@ -95,21 +85,22 @@ for node in "${all[@]}"; do
     serverIP=${n[1]}
     serverInterface=${n[2]}
     serverName=${n[0]}
+
     echo Sending Root ID Token
     ssh-copy-id root@$serverName
     echo Setting remote hostname
     ssh -t root@$serverName hostnamectl set-hostname $serverName
     echo creating local directory
     mkdir $serverName
-    echo sending user-conf.sh
+    echo sending user-conf.sh and executing
     scp user-conf.sh  root@$serverName:
-    ssh root@${n[0]} bash user.conf
+    ssh root@$serverName bash user-conf.sh
     echo Sending $user ID Token 
-    ssh-copy-id $user@${n[0]}
+    ssh-copy-id $user@$serverName
 done
 
 
-exit
+
 
 
 
@@ -117,12 +108,17 @@ exit
 
 VIP=$vip
 KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
-alias kube-vip="docker run --network host --rm ghcr.io/kube-vip/kube-vip:$KVVERSION"
 
+
+
+
+echo CREATING Kube VIP FILES
 for node in "${allmasters[@]}"; do
-  INTERFACE=${node[2]}
+  declare -n n=$node
+  echo setting ${n[0]}
+  INTERFACE=${n[2]}
 
-kube-vip manifest daemonset \
+docker run --network host --rm ghcr.io/kube-vip/kube-vip:$KVVERSION  manifest daemonset \
     --interface $INTERFACE \
     --address $VIP \
     --inCluster \
@@ -130,6 +126,6 @@ kube-vip manifest daemonset \
     --controlplane \
     --services \
     --arp \
-    --leaderElection > ${node[0]}/kube-vip.yaml
+    --leaderElection > ${n[0]}/kube-vip.yaml
 done
 

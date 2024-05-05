@@ -106,7 +106,7 @@ kubectl apply -f https://kube-vip.io/manifests/rbac.yaml
 # create the rke2 config file
 sudo mkdir -p /etc/rancher/rke2
 touch config.yaml
-echo "tls-san:" >> config.yaml 
+echo "tls-san:" > config.yaml 
 echo "  - $vip" >> config.yaml
 echo "  - $master1" >> config.yaml
 echo "  - $master2" >> config.yaml
@@ -114,6 +114,8 @@ echo "  - $master3" >> config.yaml
 echo "write-kubeconfig-mode: 0644" >> config.yaml
 echo "disable:" >> config.yaml
 echo "  - rke2-ingress-nginx" >> config.yaml
+
+
 # copy config.yaml to rancher directory
 sudo cp ~/config.yaml /etc/rancher/rke2/config.yaml
 
