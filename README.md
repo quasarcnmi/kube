@@ -79,7 +79,7 @@ Our objectives are:
 - Go to each node - execute the scripts and it should work!
 
 
-##Install Procedure
+## Install Procedure
 
 execute ***git clone https://github.com/quasarcnmi/kube*** in the (non-root) home directory of the admin server.
 
@@ -94,7 +94,7 @@ will be populated by our script -- it will contain a ```config.yaml``` and a ```
 After the cluster has been initialized there will be a ```token``` and a ```rke2.yaml``` file which will be used for  the kubectl 
 certs. 
 
-###Setup callback to ```admin1``` from ```master1```
+### Setup callback to ```admin1``` from ```master1```
 
 Logon ```admin1``` as non-root user :
 ```

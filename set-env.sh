@@ -36,7 +36,7 @@ export all=($master1 $master2 $master3 $worker1)
 export allnomaster1=($master2 $master3 $worker1)
 
 #Loadbalancer IP range
-export lbrange=10.0.1.2-10.0.1.128
+export lbrange=10.0.0.100-10.0.0.150
 
 #ssh certificate name variable
 export certName=id_rsa
@@ -61,6 +61,7 @@ fi
 
 # Create install directories in $INSTALLDIR
 
+rm ~/.ssh/known_hosts
 cp ~/kube/user-conf.sh .
 
 ## For testing purposes - in case time is wrong due to VM snapshots
@@ -79,6 +80,7 @@ else
 fi
 
 #add ssh keys for all nodes
+mkdir admin1
 
 for node in "${all[@]}"; do
     declare -n n=$node
@@ -99,18 +101,9 @@ for node in "${all[@]}"; do
     ssh-copy-id $user@$serverName
 done
 
-
-
-
-
-
 #Creating the kube-vip.yaml manifest
-
 VIP=$vip
 KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
-
-
-
 
 echo CREATING Kube VIP FILES
 for node in "${allmasters[@]}"; do
@@ -128,4 +121,21 @@ docker run --network host --rm ghcr.io/kube-vip/kube-vip:$KVVERSION  manifest da
     --arp \
     --leaderElection > ${n[0]}/kube-vip.yaml
 done
+
+# Create Master node Config file
+
+cat <<EOF > config.yaml
+tls-san: 
+  - $vip 
+  - ${master1[1]}
+  - ${master2[1]}
+  - ${master3[1]}
+write-kubeconfig-mode: 0644
+disable:
+  - rke2-ingress-nginx
+EOF
+mv config.yaml ~/kube-installer/master1
+chmod +x ~/kube/rke2-startup.sh
+cp ~/kube/rke2-startup.sh ~/kube-installer/master1
+scp -r ~/kube-installer/master1/* master1:
 
