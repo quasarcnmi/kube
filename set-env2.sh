@@ -42,7 +42,7 @@ INSTALLDIR="$HOME/kube-installer"
 cd $INSTALLDIR/admin1
 
 token=`cat token`
-cat rke2.yaml | sed 's/127.0.0.1/'${master1[1]}'/g' > $HOME/.kube/config
+cat rke2.yaml | sed 's/127.0.0.1/'$vip'/g' > $HOME/.kube/config
 export KUBECONFIG=${HOME}/.kube/config
 sudo cp ~/.kube/config /etc/rancher/rke2/rke2.yaml
 
