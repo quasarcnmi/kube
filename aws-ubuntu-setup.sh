@@ -8,7 +8,7 @@ $!/bin/bash
 
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install xfce4-goodies xfce4 xrdp wget mc software-properties-common apt-transport-https  ca-certificates curl -y
+sudo apt install xfce4-goodies xfce4 xrdp wget mc software-properties-common apt-transport-https gh firefox ca-certificates curl -y
 sudo hostnamectl set-hostname admin1
 sudo timedatectl set-timezone America/Los_Angeles
 

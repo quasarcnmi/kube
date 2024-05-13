@@ -12,9 +12,9 @@ sudo dnf install jq mc curl wget
 # Version of Kube-VIP to deploy
 export KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
 # Set the IP addresses of the admin, masters, and workers nodes
-export admin=(admin1 10.0.0.6 eth0)
-export master1=(master1 10.0.0.2 eth1)
-export master2=(master2 10.0.0.3 eth1)
+export admin=(admin1 10.0.1.203 enX0)
+export master1=(master1 10.0.1.215 enX0)
+export master2=(master2 10.0.1.27 enX0)
 export master3=(master3 10.0.0.4 eth1)
 export worker1=(worker1 10.0.0.5 eth1)
 export vip=10.0.0.10
@@ -28,7 +28,7 @@ export allmasters=($master1 $master2)
 export masters=($master2)
 
 # Array of worker nodes
-export workers=($worker1)
+export workers=()
 # Array of all
 export all=($master1 $master2)
 
@@ -36,10 +36,10 @@ export all=($master1 $master2)
 export allnomaster1=($master2 )
 
 #Loadbalancer IP range
-export lbrange=10.0.0.100-10.0.0.150
+export lbrange=10.0.1.101-10.0.0.150
 
 #ssh certificate name variable
-export certName=id_rsa
+export certName=~/home/k8s.pem
 
 INSTALLDIR="$HOME/kube-installer"
 
@@ -84,21 +84,8 @@ mkdir admin1
 
 for node in "${all[@]}"; do
     declare -n n=$node
-    serverIP=${n[1]}
-    serverInterface=${n[2]}
     serverName=${n[0]}
-
-    echo Sending Root ID Token
-    ssh-copy-id root@$serverName
-    echo Setting remote hostname
-    ssh -t root@$serverName hostnamectl set-hostname $serverName
-    echo creating local directory
     mkdir $serverName
-    echo sending user-conf.sh and executing
-    scp user-conf.sh  root@$serverName:
-    ssh root@$serverName bash user-conf.sh
-    echo Sending $user ID Token 
-    ssh-copy-id $user@$serverName
 done
 
 #Creating the kube-vip.yaml manifest
@@ -137,5 +124,5 @@ EOF
 mv config.yaml ~/kube-installer/master1
 chmod +x ~/kube/rke2-startup.sh
 cp ~/kube/rke2-startup.sh ~/kube-installer/master1
-scp -r ~/kube-installer/master1/* master1:
+scp -r -i $certName ~/kube-installer/master1/* master1:
 
