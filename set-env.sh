@@ -22,18 +22,18 @@ export vip=10.0.0.10
 export user=quasar
 
 # Array of all master nodes
-export allmasters=($master1 $master2)
+export allmasters=($master1 $master2 $master3)
 
 # Array of master nodes
-export masters=($master2)
+export masters=($master2 $master3)
 
 # Array of worker nodes
 export workers=($worker1)
 # Array of all
-export all=($master1 $master2)
+export all=($master1 $master2 $master3 $worker1)
 
 # Array of all minus master1
-export allnomaster1=($master2 )
+export allnomaster1=($master2 $master3 $worker1)
 
 #Loadbalancer IP range
 export lbrange=10.0.0.100-10.0.0.150
