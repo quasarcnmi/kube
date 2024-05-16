@@ -106,16 +106,18 @@ now when we create the cluster it will send the token and config file back to us
 With this token we can create the remaining masters and workers.
 
 ### Run the Installs from ```admin1```
-We execute the [***set-env.sh***](set-env.sh) script and answer some questions and the files willbe sent over to the master node.
+We execute the [***set-env.sh***](set-env.sh) script and answer some questions and the files will be sent over to the master node.
 
 Log onto the Master1 server and execute ***sudo bash ./rke2-startup.sh***  wait a bit and the cluster will initialize.
-it will now copy the token credentials back to the admin1  server.
+it will now copy the token credentials back to the ```admin1```  server.
 
 Now after verifying the variable information execute [***set-env2.sh***](set-env2.sh) and the token and kube-vip files will be placed on all the remaining servers.
 
 Log on to each server and execute ***sudo bash ./rke2-startup.sh***
 
 the cluster will be online. Ready for action.
+
+
 
 
 
