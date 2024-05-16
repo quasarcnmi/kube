@@ -121,7 +121,7 @@ the cluster will be online. Ready for action.
 
 There are some native RKE2 scripts which facilitate the removal of all comopnents, 
 
-On each node there is  *** /usr/bin/rke2-killall.sh***  and ***/usr/bin/rke2-uninstall.sh***
+On each node there is  ***/usr/bin/rke2-killall.sh***  and  ***/usr/bin/rke2-uninstall.sh***
 
 They have to be run as sudo of course.
 
