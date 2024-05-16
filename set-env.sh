@@ -13,10 +13,10 @@ sudo dnf install jq mc curl wget
 export KVVERSION=$(curl -sL https://api.github.com/repos/kube-vip/kube-vip/releases | jq -r ".[0].name")
 # Set the IP addresses of the admin, masters, and workers nodes
 export admin=(admin1 10.0.0.6 eth0)
-export master1=(master1 10.0.0.2 eth1)
-export master2=(master2 10.0.0.3 eth1)
-export master3=(master3 10.0.0.4 eth1)
-export worker1=(worker1 10.0.0.5 eth1)
+export master1=(master1 10.0.0.2 eth0)
+export master2=(master2 10.0.0.3 eth0)
+export master3=(master3 10.0.0.4 eth0)
+export worker1=(worker1 10.0.0.5 eth0)
 export vip=10.0.0.10
 # User of remote machines
 export user=quasar
@@ -139,3 +139,4 @@ chmod +x ~/kube/rke2-startup.sh
 cp ~/kube/rke2-startup.sh ~/kube-installer/master1
 scp -r ~/kube-installer/master1/* master1:
 
+172.232.178.167
