@@ -32,7 +32,7 @@ export all=($master1 $master2 $master3 $worker1)
 export allnomaster1=($master2 $master3 $worker1)
 
 #Loadbalancer IP range
-export lbrange=10.0.1.2-10.0.1.128
+export lbrange=10.0.0.50-10.0.0.100
 
 #ssh certificate name variable
 export certName=id_rsa

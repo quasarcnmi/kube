@@ -117,6 +117,14 @@ Log on to each server and execute ***sudo bash ./rke2-startup.sh***
 
 the cluster will be online. Ready for action.
 
+### Install MetalLB
+
+To Install the MetalLB Load Balancer review the ipAddressPool.yaml and the L2Advertisement.yaml files for their accuracy. Then execute the  [***set-env3.sh***](set-env3.sh).
+
+### Optionally Install the Rancher Desktop
+
+
+
 ### Uninstalling Cluster members
 
 There are some native RKE2 scripts which facilitate the removal of all comopnents, 
